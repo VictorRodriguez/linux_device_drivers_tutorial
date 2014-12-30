@@ -4,25 +4,21 @@
 #include <asm/uaccess.h>        /* for put_user */
 
 #define AUTOR           "Victor Rodriguez"
-#define DESCRIPCION     "Driver Hola mundo"
-#define DEVICE_NAME     "holamundodriver"
-#define MAXIMO          1024
+#define DESCRIPCION     "Char Driver Hello World"
+#define DEVICE_NAME     "mychardriver"
+#define MAX             1024
 
 static int num_mayor;
 static unsigned long procfs_buffer_size = 0;
-static char buffer_data[MAXIMO];
+static char buffer_data[MAX];
 
-
-static char msg[MAXIMO];        /* The msg the device will give when asked */
+static char msg[MAX];        /* The msg the device will give when asked */
 static char *msg_Ptr;
-
-
 
 static int device_open(struct inode *inode, struct file *file);
 static int device_release(struct inode *inode, struct file *file);
 static ssize_t device_read(struct file *, char *, size_t, loff_t *);
 static ssize_t device_write(struct file *, const char *, size_t, loff_t *);
-
 
 
 static struct file_operations fops= {
@@ -33,19 +29,18 @@ static struct file_operations fops= {
 };
 
 
-
 static int __init hola_inicio(void)
 {
 
-        printk(KERN_INFO "HOLA DESDE LA HAWKBOARD \n");
+        printk(KERN_INFO "Hello from the Kernel !!! (how cool is that) \n");
 
-        /*Pide un numero mayor al kernel */
+        /*Ask for a mayor number to the kernel */
 
         num_mayor=register_chrdev(0, DEVICE_NAME, &fops);
-        printk(KERN_INFO "EL numero mayor es %d \n",num_mayor);
-        printk(KERN_INFO "EL nombre es %s \n",DEVICE_NAME);
-        printk(KERN_INFO "Genera el device fiel con mknod /dev/%s c %d 0
-\n",DEVICE_NAME,num_mayor);
+        printk(KERN_INFO "Major Number = %d \n",num_mayor);
+        printk(KERN_INFO "Name =  %s \n",DEVICE_NAME);
+        printk(KERN_INFO "Generate the device file with\
+                mknod /dev/%s c %d 0 \n",DEVICE_NAME,num_mayor);
 
         return 0 ;
 
@@ -53,9 +48,8 @@ static int __init hola_inicio(void)
 
 static void __exit hola_fin(void)
 {
-
         unregister_chrdev(num_mayor, DEVICE_NAME);
-        printk(KERN_INFO "Adios mundo, modulo desintalado \n");
+        printk(KERN_INFO "Good Bye , modulo desinstalled \n");
 }
 
 module_init(hola_inicio);
@@ -125,8 +119,14 @@ procfs_buffer_size = len;
 }
 
 
-
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR(AUTOR);   /* Who wrote this module? */
-MODULE_DESCRIPTION(DESCRIPCION);        /* What does this module do */
-MODULE_SUPPORTED_DEVICE("holamundohawkboard");
+MODULE_AUTHOR(AUTOR);                       /* Who wrote this module? */
+MODULE_DESCRIPTION(DESCRIPCION);            /* What does this module do */
+
+/*
+ *  This module uses /dev/mychardriver.  The MODULE_SUPPORTED_DEVICE macro might
+ *  be used in the future to help automatic configuration of modules, buti is
+ *  currently unused other than for documentation purposes.
+ */
+
+MODULE_SUPPORTED_DEVICE("mychardriver");

@@ -33,6 +33,17 @@ BUILD:
     the module. If no name is passed the makefile will build the basic hello
     world module
 
-    22)  make clean : will clean the module
+    2)  make clean : will clean the module
 
+INSTALL:
 
+    insmod module.ko
+    modprobe module.ko
+
+REMOVE:
+
+    rmmod module
+
+Check printk message: 
+    
+    dmesg
