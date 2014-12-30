@@ -1,7 +1,9 @@
+ifeq ($(strip $(MODULE)),)
+	obj-m += hello_simple.o
+else
+	obj-m += $(MODULE).o
+endif
 
-obj-m += timer_simple.o
-#obj-m += timer_hiresolution.o
-#obj-m += jiffies_1.o
 
 KERNEL_SRC = /lib/modules/$(shell uname -r)/build 
 

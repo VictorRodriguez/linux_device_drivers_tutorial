@@ -29,11 +29,10 @@ You might have some problems with the livna.repo, please temporary remove it
 
 BUILD:
 
-    1)   Edit the Makefile for the module you want (an smarter Makefilewill be
-    fine)
+    1) make MODULE="<name_of_module>" // DO NOT add the .c, just the name of
+    the module. If no name is passed the makefile will build the basic hello
+    world module
 
-    2)  make : will build the module
-
-    3)  make clean : will clean the module
+    22)  make clean : will clean the module
 
 
