@@ -109,12 +109,16 @@ static ssize_t device_write(struct file *filp,
                             loff_t * off)
 {
 
-procfs_buffer_size = len;
+        procfs_buffer_size = len;
 
         if ( copy_from_user(buffer_data, buf, procfs_buffer_size) ) {
                 return -EFAULT;
         }
          *off += len;
+
+        pr_info("user input string: %s\n",buffer_data);
+        pr_info("user input string len: %lu\n",procfs_buffer_size);
+
         return procfs_buffer_size;
 }
 
