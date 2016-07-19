@@ -47,3 +47,6 @@ REMOVE:
 Check printk message: 
     
     dmesg
+    or
+    cat /var/log/syslog
+    
