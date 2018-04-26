@@ -1,6 +1,7 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/fs.h>
+// if new versions of kernel (> 4.12 ) #include <linux/uaccess.h>
 #include <asm/uaccess.h>        /* for put_user */
 
 #define AUTOR           "Victor Rodriguez"
