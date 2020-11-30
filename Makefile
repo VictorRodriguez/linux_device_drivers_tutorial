@@ -1,14 +1,17 @@
 ifeq ($(strip $(MODULE)),)
-	obj-m += hello_simple.o
+	obj-m += src/hello_simple.o
 else
 	obj-m += $(MODULE).o
 endif
 
 
-KERNEL_SRC = /lib/modules/$(shell uname -r)/build 
+KERNEL_SRC = /lib/modules/$(shell uname -r)/build
 
 all:
 	make -C $(KERNEL_SRC) M=$(PWD) modules
 
 clean:
 	make -C $(KERNEL_SRC) M=$(PWD) clean
+
+image:
+	docker build -t build_kernel .
