@@ -8,4 +8,5 @@ RUN yum -y install ncurses-devel \
 	elfutils-libelf-devel \
 	bc \
 	openssl-devel
-
+COPY scripts/build-kernel.sh /
+CMD  /build-kernel.sh
