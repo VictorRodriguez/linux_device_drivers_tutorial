@@ -7,13 +7,10 @@ RUN yum -y install ncurses-devel \
 	binutils-devel \
 	elfutils-libelf-devel \
 	bc \
-	openssl-devel
+	openssl-devel \
+	kernel-devel \
+	kernel-headers
+
 COPY scripts/build-kernel.sh /
-
-RUN mkdir /devel/
-COPY Makefile /devel/
-COPY src/ /devel/src
-
-CMD  cd /devel/ && make
-
-#CMD  /build-kernel.sh
+CMD  /build-kernel.sh
+# copy from linux/ the generated uimage to your mount volume
