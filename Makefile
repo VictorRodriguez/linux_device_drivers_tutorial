@@ -1,5 +1,5 @@
 ifeq ($(strip $(MODULE)),)
-	obj-m += src/hello_simple.o
+	obj-m += src/null_pointer.o
 else
 	obj-m += $(MODULE).o
 endif
